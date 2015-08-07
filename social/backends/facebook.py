@@ -47,13 +47,13 @@ class FacebookOAuth2(BaseOAuth2):
         params = self.setting('PROFILE_EXTRA_PARAMS', {})
         params['access_token'] = access_token
 
-        if self.setting('APPSECRET_PROOF', True):
-            _, secret = self.get_key_and_secret()
-            params['appsecret_proof'] = hmac.new(
-                secret.encode('utf8'),
-                msg=access_token.encode('utf8'),
-                digestmod=hashlib.sha256
-            ).hexdigest()
+        #if self.setting('APPSECRET_PROOF', True):
+        #    _, secret = self.get_key_and_secret()
+        #    params['appsecret_proof'] = hmac.new(
+        #        secret.encode('utf8'),
+        #        msg=access_token.encode('utf8'),
+        #        digestmod=hashlib.sha256
+        #    ).hexdigest()
         return self.get_json(self.USER_DATA_URL, params=params)
 
     def process_error(self, data):
